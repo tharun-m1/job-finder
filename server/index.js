@@ -24,7 +24,7 @@ app.listen(process.env.PORT, () => {
   mongoose
     .connect(process.env.MONGODB_URL)
     .then(() => {
-      console.log("server running at http://localhost:4000");
+      console.log(`server running at http://localhost:${process.env.PORT}`);
     })
     .catch((error) => console.log(error));
 });
