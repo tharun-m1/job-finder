@@ -19,6 +19,14 @@ app.get("/", (req, res) => {
     message: "All good!",
   });
 });
+app.get("/health", (req, res) => {
+  const currTime = new Date().toLocaleString();
+  res.status(200).json({
+    serverName: "Job Finder",
+    status: "Active",
+    Time: currTime,
+  });
+});
 
 app.listen(process.env.PORT, () => {
   mongoose
