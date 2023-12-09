@@ -102,11 +102,28 @@ app.post("/login", async (req, res) => {
   }
 });
 //-------------------------------------------------------------------------------------
+
+//------------------Error Handling Middleware------------------------------------------
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send({
+    err: {
+      status: err.status || 500,
+      message: err.message,
+    },
+  });
+});
+//------------------------------------------------------------------------------------
 app.listen(process.env.PORT, () => {
   mongoose
     .connect(process.env.MONGODB_URL)
     .then(() => {
       console.log(`server running at http://localhost:${process.env.PORT}`);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log("Connection Error\n", error));
 });
