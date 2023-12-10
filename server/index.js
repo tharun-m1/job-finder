@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-// const User = require("./models/user");
-const app = express();
 const auth = require("./routes/auth/auth");
+const jobRoutes = require("./routes/protectedRoutes/jobRoutes");
+
+const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,8 +29,10 @@ app.get("/health", (req, res) => {
     Time: currTime,
   });
 });
+
 // ------------------Routes------------------------------------------
 app.use("/", auth);
+app.use("/", jobRoutes);
 
 //------------------Error Handling Middleware-------------------------
 app.use((req, res, next) => {
