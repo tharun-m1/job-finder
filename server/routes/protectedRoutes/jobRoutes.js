@@ -9,6 +9,7 @@ const Job = require("../../models/jobs");
 router.route("/create-job").post(isLoggedIn, async (req, res) => {
   try {
     const job = req.body;
+    let skillsArray = job.skills.split(",");
     await Job.create({
       companyName: job.companyName,
       logoURL: job.logoURL,
@@ -19,7 +20,7 @@ router.route("/create-job").post(isLoggedIn, async (req, res) => {
       location: job.location,
       jobDescription: job.jobDescription,
       aboutCompany: job.aboutCompany,
-      skills: job.skills,
+      skills: skillsArray,
       information: job.information,
     });
     res.json({
@@ -35,4 +36,85 @@ router.route("/create-job").post(isLoggedIn, async (req, res) => {
   }
 });
 //----------------------------------------------------------------------
+
+// ------------------------Edit Job-------------------------------------
+
+router.route("/edit-job").put(isLoggedIn, async (req, res) => {
+  try {
+    const {
+      companyName,
+      logoURL,
+      jobPosition,
+      monthlySalary,
+      jobType,
+      office,
+      location,
+      jobDescription,
+      aboutCompany,
+      skills,
+      information,
+      _id,
+    } = req.body;
+    const job = await Job.findOne({ _id });
+    if (!job) {
+      return res.json({
+        status: "Failed",
+        message: "Job doesn't exist",
+      });
+    }
+    let skillsArray = skills.split(",");
+    await Job.findByIdAndUpdate(_id, {
+      companyName,
+      logoURL,
+      jobPosition,
+      monthlySalary,
+      jobType,
+      office,
+      location,
+      jobDescription,
+      aboutCompany,
+      skills: skillsArray,
+      information,
+    });
+    res.json({
+      status: "Success",
+      message: "Job edited Successfully!",
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      status: "Failed.",
+      message: "Unable to edit job or job not found",
+    });
+  }
+});
+//---------------------------------------------------------------------
+
+//-----------------------------Find Jobs--------------------------------
+
+router.get("/find-jobs", isLoggedIn, async (req, res) => {
+  try {
+    let { skills } = req.body;
+    if (!skills) {
+      const jobs = await Job.find({});
+      return res.json({
+        status: "Success",
+        data: jobs,
+      });
+    }
+    let skillsArray = skills.split(",");
+    const jobs = await Job.find({ skills: { $in: skillsArray } });
+    res.json({
+      status: "Success",
+      data: jobs,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({
+      status: "Failed",
+      message: "Unable to fetch jobs",
+    });
+  }
+});
+//-----------------------------------------------------------------------
 module.exports = router;

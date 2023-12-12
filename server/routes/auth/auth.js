@@ -16,6 +16,7 @@ router.route("/register").post(async (req, res) => {
     res.json({
       status: "Success",
       message: "User created Successfully!!",
+      recruiterName: name,
     });
   } catch (err) {
     res.json({
@@ -41,6 +42,7 @@ router.route("/login").post(async (req, res) => {
         res.json({
           status: "Succes",
           messagge: "You are LoggedIn.",
+          recruiterName: user.name,
           jwToken: jwToken,
         });
       } else {
