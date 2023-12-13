@@ -92,7 +92,7 @@ router.route("/edit-job").put(isLoggedIn, async (req, res) => {
 
 //-----------------------------Find Jobs--------------------------------
 
-router.get("/find-jobs", isLoggedIn, async (req, res) => {
+router.get("/find-jobs", async (req, res) => {
   try {
     let { skills } = req.body;
     if (!skills) {
@@ -104,9 +104,16 @@ router.get("/find-jobs", isLoggedIn, async (req, res) => {
     }
     let skillsArray = skills.split(",");
     const jobs = await Job.find({ skills: { $in: skillsArray } });
+    const jobArray = jobs.map((job) => {
+      return {
+        companyName: job.companyName,
+        jobType: job.jobType,
+        skills: job.skills,
+      };
+    });
     res.json({
       status: "Success",
-      data: jobs,
+      data: jobArray,
     });
   } catch (err) {
     console.log(err);
