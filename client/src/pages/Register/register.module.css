@@ -1,0 +1,74 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: DM Sans;
+  src: url("../../assets/DM_Sans/static/DMSans-ExtraLight.ttf");
+}
+.container {
+  width: 100%;
+  height: 99.5vh;
+  display: flex;
+  /* border: 1px solid red; */
+}
+.leftSection {
+  width: 60%;
+  /* border: 1px solid red; */
+}
+.rightSection {
+  width: 40%;
+  height: 100%;
+  /* border: 1px solid red; */
+  background-image: url("../../assets/LoginImage.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.caption {
+  margin-top: 30px;
+  color: #fff;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 144.023%; /* 57.609px */
+}
+.leftCaption {
+  color: #000;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 144.023%; /* 57.609px */
+
+  width: 50%;
+  margin-top: 100px;
+}
+.formContainer {
+  margin-top: 50px;
+}
+/* .buttonContainer {
+    box-sizing: content-box;
+    margin-left: 65px;
+    margin-top: 30px;
+    border: none;
+  } */
+.buttonContainer button {
+  width: 250px;
+  height: 50px;
+  border-radius: 5px;
+  background: #ed5353;
+  margin-left: 65px;
+  margin-top: 30px;
+
+  color: #fff;
+  text-align: center;
+  font-family: DM Sans;
+  font-size: 24.793px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 144.023%; /* 40.028px */
+}

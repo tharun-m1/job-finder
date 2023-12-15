@@ -5,7 +5,7 @@ const User = require("../../models/user");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const dotenv = require("dotenv").config();
 // --------------------------Register------------------------------------------------
 
 router.route("/register").post(async (req, res) => {
@@ -13,10 +13,15 @@ router.route("/register").post(async (req, res) => {
     const { name, email, mobile, password } = req.body;
     const encryptedPassword = await bcrypt.hash(password, 10);
     await User.create({ name, email, mobile, password: encryptedPassword });
+    const user = await User.findOne({ email });
+    const jwToken = jwt.sign(user.toJSON(), process.env.SECRET_KEY, {
+      expiresIn: 60 * 60,
+    });
     res.json({
-      status: "Success",
+      status: "OK",
       message: "User created Successfully!!",
       recruiterName: name,
+      jwToken,
     });
   } catch (err) {
     res.json({
@@ -39,8 +44,8 @@ router.route("/login").post(async (req, res) => {
         const jwToken = jwt.sign(user.toJSON(), process.env.SECRET_KEY, {
           expiresIn: 60 * 60,
         });
-        res.json({
-          status: "Succes",
+        res.status(200).json({
+          status: "OK",
           messagge: "You are LoggedIn.",
           recruiterName: user.name,
           jwToken: jwToken,

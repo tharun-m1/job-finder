@@ -124,4 +124,24 @@ router.get("/find-jobs", async (req, res) => {
   }
 });
 //-----------------------------------------------------------------------
+
+//-----------------------------Find Job----------------------------------
+
+router.get("/job-details/:jobId", async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    const job = await Job.findOne({ _id: jobId });
+    res.json({
+      status: "Success",
+      data: job,
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({
+      status: "Failed",
+      message: "Unable to fetch details",
+    });
+  }
+});
+//--------------------------------------------------------------------
 module.exports = router;
