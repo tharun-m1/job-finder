@@ -48,7 +48,8 @@ router.route("/login").post(async (req, res) => {
           status: "OK",
           messagge: "You are LoggedIn.",
           recruiterName: user.name,
-          jwToken: jwToken,
+          jwToken,
+          type: typeof jwToken,
         });
       } else {
         res.json({

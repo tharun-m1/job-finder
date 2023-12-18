@@ -24,7 +24,7 @@ router.route("/create-job").post(isLoggedIn, async (req, res) => {
       information: job.information,
     });
     res.json({
-      status: "Success",
+      status: "OK",
       message: "Job created.",
     });
   } catch (err) {
@@ -62,7 +62,8 @@ router.route("/edit-job").put(isLoggedIn, async (req, res) => {
         message: "Job doesn't exist",
       });
     }
-    let skillsArray = skills.split(",");
+
+    let skillsArray = typeof skills === "string" ? skills.split(",") : skills;
     await Job.findByIdAndUpdate(_id, {
       companyName,
       logoURL,
@@ -98,7 +99,7 @@ router.get("/find-jobs", async (req, res) => {
     if (!skills) {
       const jobs = await Job.find({});
       return res.json({
-        status: "Success",
+        status: "OK",
         data: jobs,
       });
     }
@@ -112,7 +113,7 @@ router.get("/find-jobs", async (req, res) => {
       };
     });
     res.json({
-      status: "Success",
+      status: "OK",
       data: jobArray,
     });
   } catch (err) {
@@ -132,7 +133,7 @@ router.get("/job-details/:jobId", async (req, res) => {
     const { jobId } = req.params;
     const job = await Job.findOne({ _id: jobId });
     res.json({
-      status: "Success",
+      status: "OK",
       data: job,
     });
   } catch (err) {

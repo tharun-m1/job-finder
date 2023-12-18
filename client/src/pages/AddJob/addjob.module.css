@@ -1,0 +1,49 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: DM Sans;
+  src: url("../../assets/DM_Sans/static/DMSans-ExtraLight.ttf");
+}
+.container {
+  display: flex;
+  height: 99.65vh;
+}
+.leftSection {
+  width: 65%;
+}
+.rightSection {
+  width: 35%;
+  background-image: url("../../assets/addJobPageImage.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.caption {
+  width: 47%;
+  text-align: center;
+  margin-top: 12px;
+  color: #000;
+  font-family: DM Sans;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 144.023%; /* 57.609px */
+}
+.formContainer {
+  width: 80%;
+  font-family: DM Sans;
+  margin-left: 70px;
+  margin-top: 20px;
+  font-size: 20px;
+  /* border: 1px solid red; */
+}
+.formContainer div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+button {
+  width: 100px;
+}
