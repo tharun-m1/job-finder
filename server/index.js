@@ -11,7 +11,11 @@ const jobRoutes = require("./routes/protectedRoutes/jobRoutes");
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://job-finder-client-alpha.vercel.app",
+  // Add other allowed origins as needed
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
