@@ -1,0 +1,47 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: DM Sans;
+}
+body {
+  background-color: #ffefef;
+}
+
+@font-face {
+  font-family: DM Sans;
+  src: url("../../assets/DM_Sans/static/DMSans-ExtraLight.ttf");
+}
+.container {
+  height: 99vh;
+
+  overflow: hidden;
+}
+.banner {
+  height: 70px;
+  border-radius: 0px 0px 62px 55px;
+  background: #ed5353;
+  display: flex;
+  align-items: center;
+  z-index: -1;
+}
+.searchContainer {
+  width: 60%;
+  height: 200px;
+  margin: auto;
+  background: #fff;
+  margin-top: 20px;
+  box-shadow: 0px 0px 22px 4px rgba(255, 32, 32, 0.25);
+}
+.jobsContainer {
+  width: 60%;
+  height: 52.5%;
+  margin: auto;
+  /* background-color: #fff; */
+  margin-top: 50px;
+  overflow-y: auto;
+  /* border: 1px solid red; */
+}
+.jobsContainer::-webkit-scrollbar {
+  display: none;
+}

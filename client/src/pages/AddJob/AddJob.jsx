@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./addjob.module.css";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 function AddJob() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data: jobData } = location.state || {
     data: {
       companyName: "",
@@ -23,9 +24,17 @@ function AddJob() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  useEffect(() => {
+    if (!localStorage.getItem("jwToken")) {
+      return navigate("/login");
+    }
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isNaN(formData.monthlySalary)) {
@@ -33,7 +42,8 @@ function AddJob() {
     }
     const jwToken = localStorage.getItem("jwToken");
     if (!jwToken) {
-      return alert("You are not loggedIn");
+      alert("You are not loggedIn");
+      return navigate("/login");
     }
     const headers = {
       "Content-Type": "application/json",
@@ -44,6 +54,7 @@ function AddJob() {
         .put("http://localhost:4000/edit-job", formData, { headers: headers })
         .then((res) => {
           alert(res.data.message);
+          return navigate("/");
         })
         .catch((err) => console.log(err));
     }
@@ -53,12 +64,18 @@ function AddJob() {
       })
       .then((res) => {
         if (res.data.status === "OK") {
-          return alert(res.data.message);
+          alert(res.data.message);
+          return navigate("/");
         } else {
-          return alert(res.data.message);
+          alert(res.data.message);
+          localStorage.removeItem("jwToken");
+          return navigate("/");
         }
       })
       .catch((err) => console.log(err));
+  };
+  const handleCancel = () => {
+    return navigate("/");
   };
   return (
     <>
@@ -310,6 +327,7 @@ function AddJob() {
                   }}
                 >
                   <button
+                    onClick={handleCancel}
                     style={{
                       height: "30px",
                       backgroundColor: "white",

@@ -27,7 +27,7 @@ function Register() {
       .then((res) => {
         if (res.data.status === "OK") {
           localStorage.setItem("jwToken", res.data.jwToken);
-          navigate("/home");
+          navigate("/");
         } else {
           alert(res.data.message);
         }

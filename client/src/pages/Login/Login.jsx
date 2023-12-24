@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,11 @@ function Login() {
     email: "",
     password: "",
   });
-
+  useEffect(() => {
+    if (localStorage.getItem("jwToken")) {
+      return navigate("/");
+    }
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -22,7 +26,7 @@ function Login() {
       .then((res) => {
         if (res.data.status === "OK") {
           localStorage.setItem("jwToken", res.data.jwToken);
-          navigate("/home");
+          navigate("/");
         } else {
           alert(res.data.message);
         }

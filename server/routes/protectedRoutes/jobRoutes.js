@@ -79,7 +79,7 @@ router.route("/edit-job").put(isLoggedIn, async (req, res) => {
     });
     res.json({
       status: "Success",
-      message: "Job edited Successfully!",
+      message: "Job Updated Successfully!",
     });
   } catch (error) {
     console.log(error);
@@ -95,7 +95,8 @@ router.route("/edit-job").put(isLoggedIn, async (req, res) => {
 
 router.get("/find-jobs", async (req, res) => {
   try {
-    let { skills } = req.body;
+    let { skills } = req.query;
+
     if (!skills) {
       const jobs = await Job.find({});
       return res.json({
@@ -103,14 +104,11 @@ router.get("/find-jobs", async (req, res) => {
         data: jobs,
       });
     }
-    let skillsArray = skills.split(",");
+    let skillsArray = typeof skills === "string" ? skills.split(",") : skills;
+    // console.log("skillsArray", skillsArray);
     const jobs = await Job.find({ skills: { $in: skillsArray } });
     const jobArray = jobs.map((job) => {
-      return {
-        companyName: job.companyName,
-        jobType: job.jobType,
-        skills: job.skills,
-      };
+      return job;
     });
     res.json({
       status: "OK",

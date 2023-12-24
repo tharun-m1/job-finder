@@ -11,6 +11,7 @@ function ViewJob() {
     }
     return false;
   });
+
   const [jobData, setJobData] = useState({});
   const { jobId } = useParams();
   const navigate = useNavigate();
@@ -25,16 +26,25 @@ function ViewJob() {
     axios
       .get(`http://localhost:4000/job-details/${jobId}`)
       .then((res) => {
-        if (res.data.status === "OK") {
+        console.log(res);
+        if (res.data.status === "OK" && res.data.data) {
           setJobData(res.data.data);
         } else {
-          alert(res.data.mesage);
+          alert("Job Not found");
+          return navigate("/");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        return navigate("/");
+      });
   }, []);
   const edit = () => {
     return navigate("/add-job", { state: { data: jobData } });
+  };
+  const logout = () => {
+    localStorage.removeItem("jwToken");
+    return navigate("/");
   };
   return (
     <>
@@ -79,6 +89,7 @@ function ViewJob() {
               </button>
             ) : (
               <button
+                onClick={logout}
                 style={{
                   height: "30px",
                   color: "white",
