@@ -11,7 +11,7 @@ function ViewJob() {
     }
     return false;
   });
-
+  axios.defaults.withCredentials = true;
   const [jobData, setJobData] = useState({});
   const { jobId } = useParams();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function ViewJob() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/job-details/${jobId}`)
+      .get(`https://job-finder-server-alpha.vercel.app/job-details/${jobId}`)
       .then((res) => {
         console.log(res);
         if (res.data.status === "OK" && res.data.data) {

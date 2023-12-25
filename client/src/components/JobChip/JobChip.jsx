@@ -10,9 +10,10 @@ function JobChip(props) {
   });
   const navigate = useNavigate();
   let jobData = props.job;
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/job-details/${jobData._id}`)
+      .get(`https://job-finder-server-alpha.vercel.app/${jobData._id}`)
       .then((res) => {
         if (res.data.status !== "OK") {
           alert("Job Not Found");
