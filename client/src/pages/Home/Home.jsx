@@ -26,6 +26,7 @@ function Home() {
   function fetchJobs() {
     axios
       .get("https://job-finder-server-alpha.vercel.app/find-jobs", {
+        withCredentials: true,
         params: { skills: skills },
       })
       .then((res) => {
