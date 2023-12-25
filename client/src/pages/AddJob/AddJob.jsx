@@ -49,10 +49,10 @@ function AddJob() {
       "Content-Type": "application/json",
       authorization: jwToken,
     };
-    axios.defaults.withCredentials = true;
+
     if (location.state) {
       return axios
-        .put("https://job-finder-server-alpha.vercel.app/edit-job", formData, {
+        .put("http://localhost:4000/edit-job", formData, {
           headers: headers,
         })
         .then((res) => {
@@ -62,7 +62,7 @@ function AddJob() {
         .catch((err) => console.log(err));
     }
     axios
-      .post("https://job-finder-server-alpha.vercel.app/create-job", formData, {
+      .post("http://localhost:4000/create-job", formData, {
         headers: headers,
       })
       .then((res) => {

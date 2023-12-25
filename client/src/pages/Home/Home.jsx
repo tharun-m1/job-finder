@@ -14,7 +14,7 @@ function Home() {
   const [skills, setSkills] = useState("");
   const [newSkill, setNewSkill] = useState("");
   const [jobs, setJobs] = useState([]);
-  axios.defaults.withCredentials = true;
+
   useEffect(() => {
     fetchJobs();
   }, [skills]);
@@ -25,8 +25,7 @@ function Home() {
   };
   function fetchJobs() {
     axios
-      .get("https://job-finder-server-alpha.vercel.app/find-jobs", {
-        withCredentials: true,
+      .get("http://localhost:4000/find-jobs", {
         params: { skills: skills },
       })
       .then((res) => {

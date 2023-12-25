@@ -14,7 +14,7 @@ function Register() {
   const signIn = () => {
     navigate("/login");
   };
-  axios.defaults.withCredentials = true;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -23,7 +23,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://job-finder-server-alpha.vercel.app/register", formData)
+      .post("http://localhost:4000/register", formData)
       .then((res) => {
         if (res.data.status === "OK") {
           localStorage.setItem("jwToken", res.data.jwToken);

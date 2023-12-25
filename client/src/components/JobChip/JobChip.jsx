@@ -10,16 +10,14 @@ function JobChip(props) {
   });
   const navigate = useNavigate();
   let jobData = props.job;
-  axios.defaults.withCredentials = true;
+
   useEffect(() => {
-    axios
-      .get(`https://job-finder-server-alpha.vercel.app/${jobData._id}`)
-      .then((res) => {
-        if (res.data.status !== "OK") {
-          alert("Job Not Found");
-          return navigate("/");
-        }
-      });
+    axios.get(`http://localhost:4000/${jobData._id}`).then((res) => {
+      if (res.data.status !== "OK") {
+        alert("Job Not Found");
+        return navigate("/");
+      }
+    });
   });
   const viewDetails = () => {
     return navigate(`view-job/${jobData._id}`);

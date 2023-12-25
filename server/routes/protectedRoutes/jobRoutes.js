@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const isLoggedIn = require("../../middleware/isLoggedIn");
 const Job = require("../../models/jobs");
-export const maxDuration = 15;
+
 //-------------------Create Job-----------------------------------------
 router.route("/create-job").post(isLoggedIn, async (req, res) => {
   try {

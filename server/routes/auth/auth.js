@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
 // --------------------------Register------------------------------------------------
-export const maxDuration = 15;
+
 router.route("/register").post(async (req, res) => {
   try {
     const { name, email, mobile, password } = req.body;
