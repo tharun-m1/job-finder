@@ -21,7 +21,13 @@ const app = express();
 //   origin: allowedOrigins,
 // };
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://job-finder-server-alpha.vercel.app/"],
+    methods: ["POST", "GET", "PUT"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
