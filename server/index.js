@@ -23,7 +23,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://job-finder-server-alpha.vercel.app/"],
+    origin: ["https://job-finder-client-alpha.vercel.app"],
     methods: ["POST", "GET", "PUT"],
     credentials: true,
   })
