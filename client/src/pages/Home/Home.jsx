@@ -14,7 +14,7 @@ function Home() {
   const [skills, setSkills] = useState("");
   const [newSkill, setNewSkill] = useState("");
   const [jobs, setJobs] = useState([]);
-
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     fetchJobs();
   }, [skills]);
