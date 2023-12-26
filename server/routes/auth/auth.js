@@ -57,6 +57,11 @@ router.route("/login").post(async (req, res) => {
           message: "Incorrect Credentials.",
         });
       }
+    } else {
+      res.json({
+        status: "Failed",
+        message: "User Doesn't exist.",
+      });
     }
   } catch (err) {
     console.log(err);
