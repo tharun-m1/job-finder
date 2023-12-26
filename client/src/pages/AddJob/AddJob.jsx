@@ -52,7 +52,7 @@ function AddJob() {
 
     if (location.state) {
       return axios
-        .put("http://localhost:4000/edit-job", formData, {
+        .put("https://job-finder-server-rqtf.onrender.com/edit-job", formData, {
           headers: headers,
         })
         .then((res) => {
@@ -62,9 +62,13 @@ function AddJob() {
         .catch((err) => console.log(err));
     }
     axios
-      .post("http://localhost:4000/create-job", formData, {
-        headers: headers,
-      })
+      .post(
+        "https://job-finder-server-rqtf.onrender.com/create-job",
+        formData,
+        {
+          headers: headers,
+        }
+      )
       .then((res) => {
         if (res.data.status === "OK") {
           alert(res.data.message);

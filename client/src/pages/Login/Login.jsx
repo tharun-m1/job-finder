@@ -23,7 +23,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/login", formData)
+      .post("https://job-finder-server-rqtf.onrender.com/login", formData)
       .then((res) => {
         if (res.data.status === "OK") {
           localStorage.setItem("jwToken", res.data.jwToken);

@@ -24,7 +24,7 @@ function ViewJob() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/job-details/${jobId}`)
+      .get(`https://job-finder-server-rqtf.onrender.com/job-details/${jobId}`)
       .then((res) => {
         console.log(res);
         if (res.data.status === "OK" && res.data.data) {

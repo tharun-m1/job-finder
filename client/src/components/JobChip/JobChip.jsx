@@ -12,12 +12,14 @@ function JobChip(props) {
   let jobData = props.job;
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/${jobData._id}`).then((res) => {
-      if (res.data.status !== "OK") {
-        alert("Job Not Found");
-        return navigate("/");
-      }
-    });
+    axios
+      .get(`https://job-finder-server-rqtf.onrender.com/${jobData._id}`)
+      .then((res) => {
+        if (res.data.status !== "OK") {
+          alert("Job Not Found");
+          return navigate("/");
+        }
+      });
   });
   const viewDetails = () => {
     return navigate(`view-job/${jobData._id}`);

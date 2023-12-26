@@ -23,7 +23,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/register", formData)
+      .post("https://job-finder-server-rqtf.onrender.com/register", formData)
       .then((res) => {
         if (res.data.status === "OK") {
           localStorage.setItem("jwToken", res.data.jwToken);

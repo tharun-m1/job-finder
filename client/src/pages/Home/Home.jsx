@@ -25,7 +25,7 @@ function Home() {
   };
   function fetchJobs() {
     axios
-      .get("http://localhost:4000/find-jobs", {
+      .get("https://job-finder-server-rqtf.onrender.com/find-jobs", {
         params: { skills: skills },
       })
       .then((res) => {
